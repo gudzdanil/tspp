@@ -2,8 +2,8 @@
 function registration(){
 	include("connect.php");
 
+	var_dump($_POST);
 	$result = 0;
-
 	$email = $_POST['email'];
 	$login = $_POST['login'];
 	$password = md5($_POST['password']);

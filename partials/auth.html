@@ -1,4 +1,4 @@
-<div>
+﻿<div>
     <tabset>
         <tab heading="Войти">
             <form ng-controller="LoginCtrl" ng-submit="login(user)">
@@ -13,7 +13,7 @@
             <form ng-controller="RegisterCtrl" ng-submit="register(user)">
                 <p><label for="email">E-mail:</label> <input id="email" type="email" ng-model="user.email" ng-required/></p>
                 <p><label for="rlogin">Логин:</label> <input id="rlogin" type="text" ng-required ng-model="user.login" ng-pattern="/^\w[\w\d]*$/" ng-minlength="3"/></p>
-                <p><label for="name">Фамилия:</label> <input id="surname" type="text" ng-required ng-model="user.lasname" ng-pattern="/^[a-zA-Zа-яА-ЯїЇєЄіІ]+$/" ng-minlength="2"/></p>
+                <p><label for="name">Фамилия:</label> <input id="surname" type="text" ng-required ng-model="user.lastname" ng-pattern="/^[a-zA-Zа-яА-ЯїЇєЄіІ]+$/" ng-minlength="2"/></p>
                 <p><label for="name">Имя:</label> <input id="name" type="text" ng-required ng-model="user.name" ng-pattern="/^[a-zA-Zа-яА-ЯїЇєЄіІ]*$/" ng-minlength="2"/></p>
                 <p><label for="rpass">Пароль:</label> <input id="rpass" type="password" ng-required ng-model="user.pass" ng-minlength="3"/></p>
                 <p><label for="rpass2">Повторите пароль:</label> <input id="rpass2" type="password" ng-required ng-model="user.pass2" ng-minlength="3"/></p>

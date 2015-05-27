@@ -3,7 +3,7 @@
 
     angular
         .module('gifts')
-        .value('API_LINK', '/back/')
+        .value('API_LINK', 'back/')
         .factory('ApiService', ApiService);
 
     ApiService.$inject = ['API_LINK', '$http'];

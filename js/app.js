@@ -1,9 +1,9 @@
-(function(){
+﻿(function(){
     'use strict';
 
     angular
         .module('gifts', ['ui.bootstrap', 'ui.router'])
-        .constant('tplFolderPath', '/partials/')
+        .constant('tplFolderPath', 'partials/')
         .constant('ROLES', {
             0: 'Пользователь',
             1: 'Продавец',
