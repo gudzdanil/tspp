@@ -16,6 +16,8 @@
 		    			$resArr = array('id' => $row['id'],
 							'email' => $row['email'],
 							'login' => $row['login'],
+							'name' => $row['name'],
+							'lastname' => $row['lastname'],
 							'roleUser' =>0);
 
 						if($row['roleAdmin'] == 1){
