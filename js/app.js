@@ -11,9 +11,9 @@
         })
         .config(appConfig);
 
-    appConfig.$inject = ['$stateProvider', '$urlRouterProvider', 'tplFolderPath'];
+    appConfig.$inject = ['$stateProvider', '$urlRouterProvider', 'tplFolderPath', '$httpProvider'];
     
-    function appConfig($stateProvider, $urlRouterProvider, tplFolderPath){
+    function appConfig($stateProvider, $urlRouterProvider, tplFolderPath, $httpProvider){
         $urlRouterProvider.otherwise('/');
 
         $stateProvider
@@ -22,5 +22,6 @@
                 templateUrl: tplFolderPath + 'auth.html',
                 controller: 'AuthCtrl'
             });
+        $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
     }
 })();
