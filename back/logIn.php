@@ -2,10 +2,13 @@
 
 function authification(){
 	include("connect.php");
+	$postdata = file_get_contents("php://input");
+	$POST = json_decode($postdata);
 
-	$logName = $_POST['logName'];
-	$password = $_POST['password'];
-	$role = intval($_POST['role']);
+	$logName = $POST->login;
+	$password = $POST->pass;
+	$role = intval($POST->role);
+	
 	$rUser = 0;
 	$rSeller = 0;
 	$rAdmin = 0;
