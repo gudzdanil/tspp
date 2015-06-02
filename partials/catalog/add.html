@@ -1,0 +1,19 @@
+<div>
+    <form style="width: 400px;margin: 20px 0" ng-submit="save(catalog)">
+        <div class="form-group">
+            <label for="catalogName">Название</label>
+            <input type="text" class="form-control" placeholder="Название" name="name" ng-model="catalog.name" id="catalogName"/>
+        </div>
+        <div class="form-group">
+            <label>Характеристики</label>
+            <ul class="list-unstyled" style="width: 50%">
+                <li ng-repeat="charact in characts" style="margin: 5px 0">
+                    <button type="button" class="btn btn-success btn-block btn-sm" ng-model="catalog.characts[charact.id]" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0">
+                        {{charact.name}}
+                    </button>
+                </li>
+            </ul>
+        </div>
+        <input type="submit" class="btn btn-default" value="Сохранить"/>
+    </form>
+</div>

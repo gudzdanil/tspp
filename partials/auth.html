@@ -1,24 +1,160 @@
-﻿<div>
-    <tabset>
+﻿<div class="authForms">
+    <tabset justified="true" type="pills">
         <tab heading="Войти">
-            <form ng-controller="LoginCtrl" ng-submit="login(user)">
-                <h2>Авторизация</h2>
-                <p><label for="login">Логин/E-mail:</label> <input id="login" type="text" ng-required ng-model="user.login" ng-pattern="/^\w[\w\d@.-]*$/" ng-minlength="3"/></p>
-                <p><label for="pass">Пароль:</label> <input type="password" ng-required id="pass" ng-model="user.pass"/></p>
-                <p><label for="arole">Роль:</label> <select ng-options="key as value for (key, value) in roles" id="arole" ng-model="user.role"></select></p>
-                <input type="submit" value="Войти"/>
+            <form ng-controller="LoginCtrl" name="auth" ng-submit="login(user, auth.$valid)" class="form-horizontal" no-validate>
+                <div class="form-group" ng-class="{'has-error': !auth.login.$valid}">
+                    <label class="col-sm-4 control-label" for="login">Логин/E-mail:</label>
+
+                    <div class="col-sm-8">
+                        <input class="form-control" ng-pattern="/^\w[\w\d@.-]*$/" id="login" name="login" type="text"
+                               ng-required
+                               ng-model="user.login"
+                               ng-minlength="3"/>
+                        <div ng-show="auth.$submitted">
+                            <span ng-show="auth.login.$pristine">Поле обязательно для заполнения.</span>
+                            <span ng-show="auth.login.$error.minlength">
+                                Минимальная длинна поля должна составлять 3 символа
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" ng-class="{'has-error': !auth.pass.$valid && !auth.pass.$pristine}">
+                    <label class="col-sm-4 control-label" for="pass">Пароль:</label>
+
+                    <div class="col-sm-8">
+                        <input class="form-control" type="password" ng-required="true" id="pass"
+                               ng-model="user.pass" name="pass"/>
+                        <div ng-show="auth.$submitted">
+                            <span ng-show="auth.pass.$pristine">Поле обязательно для заполнения.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="arole">Роль:</label>
+
+                    <div class="col-sm-8">
+                        <select class="form-control" ng-options="key as value for (key, value) in roles"
+                                id="arole" ng-model="user.role">
+                        </select>
+                    </div>
+                </div>
+                <p style="text-align: center"><input class="btn btn-default" ng-disabled="!auth.$valid || auth.$pristine" type="submit" value="Войти"/></p>
             </form>
         </tab>
         <tab heading="Зарегистрироваться">
-            <form ng-controller="RegisterCtrl" ng-submit="register(user)">
-                <p><label for="email">E-mail:</label> <input id="email" type="email" ng-model="user.email" ng-required/></p>
-                <p><label for="rlogin">Логин:</label> <input id="rlogin" type="text" ng-required ng-model="user.login" ng-pattern="/^\w[\w\d]*$/" ng-minlength="3"/></p>
-                <p><label for="name">Фамилия:</label> <input id="surname" type="text" ng-required ng-model="user.lastname" ng-pattern="/^[a-zA-Zа-яА-ЯїЇєЄіІ]+$/" ng-minlength="2"/></p>
-                <p><label for="name">Имя:</label> <input id="name" type="text" ng-required ng-model="user.name" ng-pattern="/^[a-zA-Zа-яА-ЯїЇєЄіІ]*$/" ng-minlength="2"/></p>
-                <p><label for="rpass">Пароль:</label> <input id="rpass" type="password" ng-required ng-model="user.pass" ng-minlength="3"/></p>
-                <p><label for="rpass2">Повторите пароль:</label> <input id="rpass2" type="password" ng-required ng-model="user.pass2" ng-minlength="3"/></p>
-                <p><label for="rrole">Роль:</label> <select ng-options="key as value for (key, value) in roles" id="rrole" ng-model="user.role"></select></p>
-                <input type="submit" class="" value="Зарегистрироваться"/>
+            <form class="form-horizontal" name="reg" ng-controller="RegisterCtrl" ng-submit="register(user2, reg.$valid)">
+                <div class="form-group" ng-class="{'has-error': !reg.email.$valid}">
+                    <label class="col-sm-4 control-label" for="email">E-mail:</label>
+
+                    <div class="col-sm-8">
+                        <input class="form-control" id="email" type="email" name="email" ng-model="user2.email"
+                               ng-required/>
+                        <div ng-show="reg.$submitted">
+                            <span ng-show="reg.email.$pristine">Поле обязательно для заполнения.</span>
+                            <span ng-show="reg.email.$error.email">
+                                Неверно введен e-mail
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" ng-class="{'has-error': !reg.rlogin.$valid}">
+                    <label class="col-sm-4 control-label" for="rlogin">Логин:</label>
+
+                    <div class="col-sm-8">
+                        <input class="form-control" id="rlogin" type="text" name="rlogin" ng-required ng-model="user2.login"
+                               ng-pattern="/^\w[\w\d]*$/" ng-minlength="3"/>
+                        <div ng-show="reg.$submitted">
+                            <span ng-show="reg.rlogin.$pristine">Поле обязательно для заполнения.</span>
+                            <span ng-show="reg.rlogin.$error.minlength">
+                                Минимальная длинна логина 3 символа
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" ng-class="{'has-error': !reg.surname.$valid}">
+                    <label class="col-sm-4 control-label" for="surname">Фамилия:</label>
+
+                    <div class="col-sm-8">
+                        <input class="form-control" id="surname" type="text" ng-required
+                               ng-model="user2.lastname" name="surname"
+                               ng-pattern="/^[a-zA-Zа-яА-ЯїЇєЄіІ]+$/" ng-minlength="2"/>
+                        <div ng-show="reg.$submitted">
+                            <span ng-show="reg.surname.$pristine">Поле обязательно для заполнения.</span>
+                            <span ng-show="reg.surname.$error.minlength">
+                                Минимальная длинна фамилии 2 символа
+                            </span>
+                            <span ng-show="reg.surname.$error.pattern">
+                                Фамилия должна состоять только из букв
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" ng-class="{'has-error': !reg.name.$valid}">
+                    <label class="col-sm-4 control-label" for="name">Имя:</label>
+
+                    <div class="col-sm-8">
+                        <input class="form-control" id="name" type="text" ng-required ng-model="user2.name"
+                               ng-pattern="/^[a-zA-Zа-яА-ЯїЇєЄіІ]*$/" ng-minlength="2" name="name"/>
+                        <div ng-show="reg.$submitted">
+                            <span ng-show="reg.name.$pristine">Поле обязательно для заполнения.</span>
+                            <span ng-show="reg.name.$error.minlength">
+                                Минимальная длинна фамилии 2 символа
+                            </span>
+                            <span ng-show="reg.name.$error.pattern">
+                                Имя должно состоять только из букв
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" ng-class="{'has-error': !reg.rpass.$valid && !reg.rpass.$pristine}">
+                    <label class="col-sm-4 control-label" for="rpass">Пароль:</label>
+
+                    <div class="col-sm-8">
+                        <input class="form-control" id="rpass" type="password" ng-required="true"
+                               ng-model="user2.pass" ng-minlength="3" name="rpass"/>
+                        <div ng-show="reg.$submitted">
+                            <span ng-show="reg.rpass.$pristine">Поле обязательно для заполнения.</span>
+                            <span ng-show="reg.rpass.$error.minlength">
+                                Минимальная длинна пароля 3 символа
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" ng-class="{'has-error': !reg.rpass2.$valid || user2.pass2 !== user2.pass}">
+                    <label class="col-sm-4 control-label" for="rpass2">Повторите пароль:</label>
+
+                    <div class="col-sm-8">
+                        <input class="form-control" id="rpass2" type="password" ng-required
+                               ng-model="user2.pass2" ng-minlength="3" name="rpass2"/>
+                        <div ng-show="reg.$submitted">
+                            <span ng-show="reg.rpass.$pristine">Поле обязательно для заполнения.</span>
+                            <span ng-show="reg.rpass.$error.minlength">
+                                Минимальная длинна пароля 3 символа
+                            </span>
+                            <span ng-show="user2.pass2 !== user2.pass">
+                                Пароли не совпадают
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="rrole">Роль:</label>
+
+                    <div class="col-sm-8">
+                        <select class="form-control" ng-options="key as value for (key, value) in roles"
+                                id="rrole" ng-model="user2.role" name="rrole">
+                        </select>
+                    </div>
+                </div>
+                <p style="text-align: center"><input class="btn btn-default" ng-disabled="!reg.$valid || reg.$pristine" type="submit" value="Зарегистрироваться"/></p>
             </form>
         </tab>
     </tabset>

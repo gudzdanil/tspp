@@ -1,3 +1,7 @@
-input.ng-invalid, select.ng-invalid{
-    border: 1px solid red;
+.authForms{
+    width:500px;
+    margin: 0 auto;
+}
+.authForms form{
+    padding: 20px;
 }
