@@ -12,13 +12,19 @@
         if($scope.charact && $scope.charact.additional){
             $scope.charact.additional = angular.fromJson($scope.charact.additional);
         }
+        $scope.addAdditional = function(){
+            $scope.charact.additional = $scope.charact.additional || [];
+            $scope.charact.additional.push('');
+        };
         $scope.save = save;
         $scope.types = CharactService.types;
 
         function save(){
+            var temp = $scope.charact.additional;
             $scope.charact.additional = angular.toJson($scope.charact.additional);
             CharactService.save($scope.charact);
             alert("Характеристика сохранена!");
+            $scope.charact.additional = temp;
         }
     }
 })();

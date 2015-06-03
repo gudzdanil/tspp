@@ -1,5 +1,5 @@
 <div>
-    <form style="width: 400px;margin: 20px 0" ng-submit="save(charact)">
+    <form style="width: 400px;margin: 20px 0">
         <div class="form-group">
             <label for="charactName">Название</label>
             <input type="text" class="form-control" placeholder="Название" name="name" ng-model="charact.name" id="charactName"/>
@@ -11,14 +11,14 @@
         <div class="form-group">
             <div ng-if="charact.type=='select'">
                 <label>Значения списка</label>
-                <ol ng-init="charact.additional = []" class="list-unstyled">
+                <ol class="list-unstyled">
                     <li ng-repeat="option in charact.additional track by $index">
-                        <input type="text" ng-model="option" class="form-control"/>
+                        <input type="text" ng-model="charact.additional[$index]" class="form-control"/>
                     </li>
                 </ol>
-                <button class="btn btn-success" ng-click="charact.options.push('')">Добавить значение</button>
+                <button class="btn btn-success" ng-click="addAdditional()">Добавить значение</button>
             </div>
         </div>
-        <input type="submit" class="btn btn-default" value="Сохранить"/>
+        <input type="button" ng-click="save(charact)" class="btn btn-default" value="Сохранить"/>
     </form>
 </div>

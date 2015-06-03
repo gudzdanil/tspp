@@ -1,0 +1,38 @@
+<div style="margin: 20px 0">
+    <form class="col-md-6">
+        <button ng-show="criterion.link" ng-click="copyCharact()" class="btn btn-success">
+            Использовать значения выбранной характеристики
+        </button>
+        <div class="form-group">
+            <label for="criterionName">Название</label>
+            <input type="text" class="form-control" placeholder="Название" name="name" ng-model="criterion.name" id="criterionName"/>
+        </div>
+        <div class="form-group">
+            <label for="criterionType">Тип</label>
+            <select class="form-control" name="type" id="criterionType" ng-model="criterion.type" ng-options="key as value for (key,value) in types"></select>
+        </div>
+        <div class="form-group">
+            <div ng-if="criterion.type=='select'">
+                <label>Значения списка</label>
+                <ol class="list-unstyled">
+                    <li ng-repeat="option in criterion.additional track by $index">
+                        <input type="text" ng-model="criterion.additional[$index]" class="form-control"/>
+                    </li>
+                </ol>
+                <button class="btn btn-success" ng-click="addAdditional()">Добавить значение</button>
+            </div>
+        </div>
+        <input type="button" ng-click="save()" class="btn btn-default" value="Сохранить"/>
+    </form>
+    <form class="col-md-6" name="linkedCharact">
+        <h4>Привязать к характеристике</h4>
+        <ul class="list-unstyled">
+            <li ng-repeat="charact in characts">
+                <label>
+                    <input type="radio" ng-model="criterion.link" name="charact" ng-value="{{charact.id}}"/>
+                    {{charact.name}} | {{types[charact.type]}}
+                </label>
+            </li>
+        </ul>
+    </form>
+</div>

@@ -9,8 +9,11 @@
 
     function CharactAddCtrl($scope, CharactService, ApiService){
         $scope.charact = {
-            type: 'select'
+            type: 'select',
+            additional: []
         };
+        $scope.addAdditional = function(){$scope.charact.additional.push('');};
+
         $scope.types = CharactService.types;
         $scope.save = save;
 
@@ -19,7 +22,7 @@
             $scope.charact.additional = angular.toJson($scope.charact.additional);
             CharactService.add(charact);
             alert("Новая характеристика добавлена!");
-            $scope.charact = {type: 'select'};
+            $scope.charact = {type: 'select', additional: []};
         }
     }
 })();
