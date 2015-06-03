@@ -1,5 +1,5 @@
 <div>
-    <form style="width: 400px;margin: 20px 0" ng-submit="save(catalog)">
+    <form style="width: 400px;margin: 20px 0">
         <div class="form-group">
             <label for="catalogName">Название</label>
             <input type="text" class="form-control" placeholder="Название" name="name" ng-model="catalog.name" id="catalogName"/>
@@ -14,6 +14,6 @@
                 </li>
             </ul>
         </div>
-        <input type="submit" class="btn btn-default" value="Сохранить"/>
+        <input type="button" ng-click="save(catalog)" class="btn btn-default" value="Сохранить"/>
     </form>
 </div>

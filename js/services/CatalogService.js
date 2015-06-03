@@ -38,8 +38,8 @@
         }
 
         function add(catalog){
-            catalog.id = ++lastId;
             generated.push(catalog);
+            catalog.id = generated.length;
         }
 
         function generate(){
@@ -47,17 +47,17 @@
                 {
                     id: 1,
                     name: 'Мебель',
-                    characts: {1: 1}
+                    characts: [1]
                 },
                 {
                     id: 2,
                     name: 'Телефоны',
-                    characts: {2: 1,3: 1}
+                    characts: [2,3]
                 },
                 {
                     id: 3,
                     name: 'Мониторы',
-                    characts: {1: 1,3: 1}
+                    characts: [1,3]
                 }
             ]
         }

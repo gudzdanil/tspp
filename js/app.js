@@ -59,6 +59,24 @@
                 url: '/characteristics/edit/:id',
                 controller: 'CharactEditExactCtrl'
             })
+            .state('main.criterion', {
+                templateUrl: tplFolderPath + 'criterion.html'
+            })
+            .state('main.criterion.add', {
+                templateUrl: tplFolderPath + 'criterion/add.html',
+                url: '/criterion/add',
+                controller: 'CriterionAddCtrl'
+            })
+            .state('main.criterion.edit', {
+                templateUrl: tplFolderPath + 'criterion/edit.html',
+                url: '/criterion/edit',
+                controller: 'CriterionEditCtrl'
+            })
+            .state('main.criterion.editC', {
+                templateUrl: tplFolderPath + 'criterion/editExact.html',
+                url: '/criterion/edit/:id',
+                controller: 'CriterionEditExactCtrl'
+            })
             .state('main.catalog', {
                 templateUrl: tplFolderPath + 'catalog.html'
             })
