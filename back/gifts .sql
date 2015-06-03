@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1
--- Время создания: Май 27 2015 г., 18:51
+-- Время создания: Июн 03 2015 г., 02:07
 -- Версия сервера: 5.6.15-log
 -- Версия PHP: 5.5.8
 
@@ -36,6 +36,48 @@ CREATE TABLE IF NOT EXISTS `companies` (
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `gifts`
+--
+
+CREATE TABLE IF NOT EXISTS `gifts` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `img_url` text NOT NULL,
+  `link` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `giftstorules`
+--
+
+CREATE TABLE IF NOT EXISTS `giftstorules` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_rules` int(11) NOT NULL,
+  `id_gifts` int(11) NOT NULL,
+  `value` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `rules`
+--
+
+CREATE TABLE IF NOT EXISTS `rules` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` text NOT NULL,
+  `type` text NOT NULL,
+  `additional` varchar(500) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `users`
 --
 
@@ -50,7 +92,14 @@ CREATE TABLE IF NOT EXISTS `users` (
   `roleAdmin` tinyint(4) NOT NULL,
   `roleSeller` tinyint(4) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Дамп данных таблицы `users`
+--
+
+INSERT INTO `users` (`id`, `email`, `login`, `name`, `lastname`, `password`, `roleUser`, `roleAdmin`, `roleSeller`) VALUES
+(4, 'demonk9@rambler.ru', 'test', 'qqqq', 'qqqqq', '202cb962ac59075b964b07152d234b70', 1, 0, 0);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

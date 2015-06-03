@@ -2,16 +2,18 @@
 function registration(){
 	include("connect.php");
 
-	var_dump($_POST);
+	$postdata = file_get_contents("php://input");
+	$POST = json_decode($postdata);
+
 	$result = 0;
-	$email = $_POST['email'];
-	$login = $_POST['login'];
-	$password = md5($_POST['password']);
-	$name = $_POST['name'];
-	$lastname = $_POST['lastname'];
+	$email = $POST->email;
+	$login = $POST->login;
+	$password = md5($POST->pass);
+	$name = $POST->name;
+	$lastname = $POST->lastname;
 	$roleUser = 0;
 	$roleSeller = 0;
-	if(intval($_POST['role'])==1){
+	if(intval($POST->role)==1){
 		$roleSeller = 1;
 	}
 	else{
@@ -20,10 +22,13 @@ function registration(){
 	//role  0 -user,1 - seller,2-admin
 
 	$sql = "INSERT INTO `users`(`email`, `login`, `name`, `lastname`, `password`, `roleUser`, `roleSeller`)
-	 VALUES ('$email','$login','$name','$lastname','$roleUser','$roleSeller');";
+	 VALUES ('$email','$login','$name','$lastname','$password','$roleUser','$roleSeller')";
 
 	 if(mysqli_query($mysql,$sql)){
-	 	$registration = 1;
+	 	$result = 1;
+	 }
+	 else{
+	 	echo mysqli_error($mysql);
 	 }
 	 echo json_encode($result);
 	mysqli_close($mysql);
