@@ -30,7 +30,7 @@
                 },
                 {
                     id: 3,
-                    charact: 2,
+                    charact: 3,
                     val: 58
                 }
             ];

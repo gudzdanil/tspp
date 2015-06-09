@@ -10,7 +10,7 @@
     function AuthData($state) {
         var data = {};
 
-        data = getData();
+//        data = getData();
 
         return {
             data: data,
@@ -22,9 +22,11 @@
 
         function setData(authdata){
             data.login = authdata.login;
-            data.surname = authdata.surname;
+            data.email = authdata.email;
+            data.id = authdata.id;
+            data.lastname = authdata.lastname;
             data.name = authdata.name;
-            data.role = authdata.role;
+            data.role = roleToString(authdata.roleUser);
         }
         function clearData(){
             angular.forEach(data, function(el, key){
@@ -39,10 +41,14 @@
             return role == data.role;
         }
 
+        function roleToString(id){
+            return id == 0 ? 'user' : (id == 1 ? 'seller' : 'admin');
+        }
+
         function getData(){
             return {
                 login: 'JustDanny',
-                surname: 'Гудзь',
+                lastname: 'Гудзь',
                 name: 'Данил',
                 role: 'admin'
             };

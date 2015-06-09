@@ -51,7 +51,7 @@
                 {
                     id: 2,
                     name: 'Телефоны',
-                    characts: [2,3]
+                    characts: [1,2]
                 },
                 {
                     id: 3,

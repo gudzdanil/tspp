@@ -20,16 +20,27 @@
             data = angular.copy(data);
             delete data.pass2;
             return $http.post(API_LINK + 'reg.php', data).then(function(response){
-                console.log(response);
+                if(response == 1){
+                    alert("Вы успешно зарегистрировались")
+                }
+                else{
+                    alert("Ошибка регистрации");
+                }
             }, function(err){
                 console.log(err);
             });
         }
         function login(data) {
             return $http.post(API_LINK + 'logIn.php', data).then(function(response){
-                console.log(response);
+                if(response.data !== -1){
+                    AuthData.setData(response.data);
+                }
+                else{
+                    alert('Логин или пароль введены неверно!');
+                }
             }, function(err){
                 console.log(err);
+                alert('Ошибка авторизации');
             });
         }
         function logout(){
