@@ -6,7 +6,7 @@ function authification(){
 	$POST = json_decode($postdata);
 
 	$logName = $POST->login;
-	$password = $POST->pass;
+	$password = md5($POST->pass);
 	$role = intval($POST->role);
 	
 	$rUser = 0;
@@ -27,7 +27,7 @@ function authification(){
 	}
 
 	$sql = "SELECT `id`, `email`, `login`, `name`, `lastname`, `roleUser`, `roleAdmin`, `roleSeller` FROM `users`
-	 WHERE `login` = '$logName' OR `email` = '$logName' AND `roleUser` = 'rUser' AND `roleAdmin` = 'rAdmin' AND `roleSeller` = 'rSeller'";
+	 WHERE `roleUser` = '$rUser' AND `roleAdmin` = '$rAdmin' AND `roleSeller` = '$rSeller' AND(`login` = '$logName' OR `email` = '$logName') AND `password`='$password'";
 
 	$result = mysqli_query($mysql,$sql);
 

@@ -10,7 +10,7 @@
 	$sql = "INSERT INTO `rules`(`name`, `type`, `additional`) VALUES ('$POST->name','$POST->type','$POST->additional')";
 
 	if(mysqli_query($mysql,$sql)){
-		$result = mysql_insert_id($mysql);
+		$result = mysqli_insert_id($mysql);
 	}
 	else{
 		$result = -1;
