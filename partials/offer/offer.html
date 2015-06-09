@@ -1,0 +1,29 @@
+<div>
+    <h2>{{offer.name}}</h2>
+
+    <div class="col-sm-3">
+        <img ng-src="{{offer.img}}" alt="product image" style="width: 100%;"/>
+    </div>
+    <div class="col-sm-9">
+        <dl class="dl-horizontal">
+            <dt>Каталог</dt>
+            <dd>{{getCatalog(offer.catalog).name}}</dd>
+        </dl>
+        <dl class="dl-horizontal">
+            <dt>Бренд</dt>
+            <dd>{{offer.brand}}</dd>
+        </dl>
+        <dl class="dl-horizontal">
+            <dt>Цена</dt>
+            <dd>{{offer.price}} грн.</dd>
+        </dl>
+        <dl class="dl-horizontal" ng-repeat="value in values">
+            <dt>{{value.name}}</dt>
+            <dd>{{value.val}}</dd>
+        </dl>
+        <dl class="dl-horizontal">
+            <dt><span ng-click="log()" title="Добавить в логгер" class="glyphicon glyphicon-pushpin"></span>Дополнительная<br/>информация </dt>
+            <dd>{{offer.additional}}</dd>
+        </dl>
+    </div>
+</div>

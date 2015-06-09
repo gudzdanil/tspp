@@ -1,0 +1,16 @@
+<ul class="list-unstyled">
+    <li ng-repeat="offer in offers" class="row thumbnail" style="position: relative">
+        <div class="col-xs-3">
+            <a ui-sref="main.offer({id: offer.id})">
+                <img ng-if="offer.img" ng-src="{{offer.img}}" alt="{{offer.name}}" class="img-thumbnail"/>
+                <img ng-if="!offer.img" src="http://www.edilisrl.com/wp-content/themes/edili/images/emptyImg.jpg" alt="{{offer.name}}" class="img-thumbnail"/>
+            </a>
+        </div>
+        <div class="col-xs-9 offer-label">
+            <p><a ui-sref="main.offer({id: offer.id})" ng-bind="offer.name" class=""></a></p>
+            <p>Каталог: {{getCatalog(offer.catalog).name}}</p>
+            <p>Цена: {{offer.price}} грн.</p>
+        </div>
+        <span ng-click="remove(offer.id)" class="glyphicon glyphicon-remove"></span>
+    </li>
+</ul>

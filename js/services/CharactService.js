@@ -62,7 +62,7 @@
                 {
                     id: 2,
                     name: 'Диагональ',
-                    type: 'range'
+                    type: 'number'
                 },
                 {
                     id: 3,

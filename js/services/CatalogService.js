@@ -10,7 +10,6 @@
     function CatalogService(){
 
         var generated = generate();
-        var lastId = 3;
 
         return {
             precreated: generated,

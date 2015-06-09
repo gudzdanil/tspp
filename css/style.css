@@ -5,3 +5,25 @@
 .authForms form{
     padding: 20px;
 }
+.offer-label a{
+    font-size: 1.4vw;
+}
+.offer-label{
+    font-size: 1vw;
+}
+.glyphicon-remove {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+.glyphicon-pushpin{
+    cursor: pointer;
+}
+.log-item{
+    position: relative;
+}
+.log-item .glyphicon-remove{
+    top: 2px;
+    right: 0px;
+}

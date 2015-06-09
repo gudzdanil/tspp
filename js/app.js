@@ -94,6 +94,16 @@
                 templateUrl: tplFolderPath + 'catalog/editExact.html',
                 url: '/catalogs/edit/:id',
                 controller: 'CatalogEditExactCtrl'
+            })
+            .state('main.offers', {
+                templateUrl: tplFolderPath + '/offer/offers.html',
+                url: '/offers',
+                controller: 'OfferListCtrl'
+            })
+            .state('main.offer', {
+                templateUrl: tplFolderPath + '/offer/offer.html',
+                url: '/offer/:id',
+                controller: 'OfferCtrl'
             });
 
         $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';

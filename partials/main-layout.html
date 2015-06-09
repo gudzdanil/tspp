@@ -1,5 +1,5 @@
-<div class="container-fluid">
-    <nav class="navbar navbar-default" ng-controller="TopNavCtrl">
+<div class="container-fluid" ng-controller="TopNavCtrl">
+    <nav class="navbar navbar-default">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -15,7 +15,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a ui-sref="main.home">Главная</a></li>
+                    <li ui-sref-active="active"><a ui-sref="main.home">Главная</a></li>
                     <li class="dropdown" ng-if="isAuthenticated('admin')">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Каталоги<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
@@ -37,8 +37,8 @@
                             <li><a href="" ui-sref="main.criterion.edit">Редактировать</a></li>
                         </ul>
                     </li>
-                    <li ng-if="isAuthenticated('admin')">
-                        <a href="#" role="button" ui-sref="main.proposals">Заявки <span class="badge">4</span></a>
+                    <li ng-if="isAuthenticated('admin')" ui-sref-active="active">
+                        <a href="#" role="button" ui-sref="main.offers">Заявки <span class="badge" ng-bind="offers.length"></span></a>
                     </li>
                 </ul>
 
@@ -55,5 +55,10 @@
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
-    <div ui-view class="container"></div>
+    <div class="container">
+        <div ng-class="{'col-xs-8': isAuthenticated('admin')}" ui-view></div>
+        <div ng-if="isAuthenticated('admin')" class="col-xs-4" ng-include="'partials/logger.html'">
+        </div>
+
+    </div>
 </div>
