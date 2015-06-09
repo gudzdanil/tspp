@@ -14,8 +14,20 @@
             register: register,
             logout: logout,
             checkAuth: checkAuth,
-            addCharact: addCharact
+            charact:{
+                getAll: getCharacts,
+                getById: getCharact,
+                add: addCharact
+            }
         };
+
+        function getCharact(id){
+            return $http.post(API_LINK + 'rules/getRuleById.php', {id: +id});
+        }
+
+        function getCharacts(){
+            return $http.get(API_LINK + 'rules/getAllRules.php');
+        }
 
         function checkAuth(){
             return $http.get(API_LINK + 'session.php').then(function(response){

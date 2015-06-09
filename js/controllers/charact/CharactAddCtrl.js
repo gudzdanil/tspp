@@ -20,7 +20,7 @@
         function save(charact){
             //ApiService.addCharact(charact);
             $scope.charact.additional = angular.toJson($scope.charact.additional);
-            ApiService.addCharact(charact).then(function(response){
+            ApiService.charact.add(charact).then(function(response){
                 alert("Новая характеристика добавлена!");
                 console.log(response);
             }, function(err){
