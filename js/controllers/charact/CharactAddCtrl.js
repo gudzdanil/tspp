@@ -20,8 +20,14 @@
         function save(charact){
             //ApiService.addCharact(charact);
             $scope.charact.additional = angular.toJson($scope.charact.additional);
-            CharactService.add(charact);
-            alert("Новая характеристика добавлена!");
+            ApiService.addCharact(charact).then(function(response){
+                alert("Новая характеристика добавлена!");
+                console.log(response);
+            }, function(err){
+                alert("Ошибка добавления новой характеристики");
+                console.log(err);
+            });
+
             $scope.charact = {type: 'select', additional: []};
         }
     }

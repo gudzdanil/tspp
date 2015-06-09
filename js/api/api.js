@@ -13,8 +13,19 @@
             login: login,
             register: register,
             logout: logout,
+            checkAuth: checkAuth,
             addCharact: addCharact
         };
+
+        function checkAuth(){
+            return $http.get(API_LINK + 'session.php').then(function(response){
+                if(response.data !== -1){
+                    AuthData.setData(response.data);
+                }
+            }, function(err){
+                console.log(err);
+            });
+        }
 
         function register(data) {
             data = angular.copy(data);
@@ -48,8 +59,7 @@
         }
 
         function addCharact(data){
-            data.additional = angular.toJson(data.additional);
-            return $http.post(API_LINK + 'addCharact.php', data);
+            return $http.post(API_LINK + 'rules/addRule.php', data);
         }
     }
 })();

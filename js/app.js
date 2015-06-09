@@ -15,6 +15,7 @@
     appConfig.$inject = ['$stateProvider', '$urlRouterProvider', 'tplFolderPath', '$httpProvider'];
     
     function appConfig($stateProvider, $urlRouterProvider, tplFolderPath, $httpProvider){
+
         $urlRouterProvider.otherwise('/');
 
         $stateProvider
@@ -110,12 +111,13 @@
     }
 
 
-    appRun.$inject = ['$rootScope', 'AuthData', '$state'];
-    function appRun($rootScope, AuthData, $state){
-//        console.log($state.current);
-        checkAuthorization(null, $state.current, null);
-        $rootScope.$on( '$stateChangeStart', function(e, toState, toParams, fromState) {
-            checkAuthorization(e, toState, fromState);
+    appRun.$inject = ['$rootScope', 'AuthData', '$state', 'ApiService'];
+    function appRun($rootScope, AuthData, $state, ApiService){
+        ApiService.checkAuth().then(function(){
+            checkAuthorization(null, $state.current, null);
+            $rootScope.$on( '$stateChangeStart', function(e, toState, toParams, fromState) {
+                checkAuthorization(e, toState, fromState);
+            });
         });
 
         function checkAuthorization(e, toState, fromState){
