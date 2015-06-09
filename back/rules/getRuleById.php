@@ -1,5 +1,5 @@
 <?php
-	function getRules(){
+	function getRuleById(){
 
 	include("connect.php");
 
@@ -7,7 +7,7 @@
 	$POST = json_decode($postdata);
 
 
-	$sql = "SELECT `id,`name`, `type`, `additional` FROM `rules`";
+	$sql = "SELECT `id,`name`, `type`, `additional` FROM `rules` WHERE `id` = '$POST->id'";
 
 	$rez = mysqli_query($mysql,$sql;
 
@@ -25,6 +25,6 @@
 
 	};
 
-	getRules();
+	getRuleById();
 
 ?>
