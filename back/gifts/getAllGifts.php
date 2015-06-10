@@ -35,12 +35,12 @@
 			}
 		}
 		for($i=0;$i<count($result);$i++){
-			$id = $result[$i]['id'];
-			$sql = "SELECT `id_rule` FROM `catalogtorules` WHERE `id_catalog`='$id'";
+			$id = $result[$i]['offer_id'];
+			$sql = "SELECT `id_offer`, `id_rule`, `value` FROM `offertorule` WHERE `id_offer`='$id'";
 			if($rez = mysqli_query($mysql,$sql)){
 				if(mysqli_num_rows($rez)>0){
 					while($r = mysqli_fetch_assoc($rez)){
-						$result[$i]['characts'][] = $r['id_rule'];
+						$result[$i]['characts'][] = $r;
 					}
 				}
 			}
