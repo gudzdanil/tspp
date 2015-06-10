@@ -1,5 +1,8 @@
 <div>
-    <ul style="margin: 20px 0;">
+    <div ng-show="loading" class="spinner-container">
+        <img src="img/spinner.svg" alt=""/>
+    </div>
+    <ul style="margin: 20px 0;" ng-show="!loading">
         <li ng-repeat="charact in characts">
             {{charact.name}} <a class="glyphicon glyphicon-pencil" ui-sref="main.charact.editC({id: charact.id})"></a>
         </li>

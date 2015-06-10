@@ -17,9 +17,14 @@
             charact:{
                 getAll: getCharacts,
                 getById: getCharact,
-                add: addCharact
+                add: addCharact,
+                save: saveCharact
             }
         };
+
+        function saveCharact(charact){
+            return $http.post(API_LINK + 'rules/editRule.php', charact);
+        }
 
         function getCharact(id){
             return $http.post(API_LINK + 'rules/getRuleById.php', {id: +id});

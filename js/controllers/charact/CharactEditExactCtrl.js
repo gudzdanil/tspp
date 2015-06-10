@@ -5,33 +5,39 @@
         .module('gifts')
         .controller('CharactEditExactCtrl', CharactEditExactCtrl);
 
-    CharactEditExactCtrl.$inject = ['$scope', '$stateParams', 'ApiService'];
+    CharactEditExactCtrl.$inject = ['$scope', '$stateParams', 'ApiService', 'CharactService'];
 
-    function CharactEditExactCtrl($scope, $stateParams, ApiService){
+    function CharactEditExactCtrl($scope, $stateParams, ApiService, CharactService){
+        $scope.loading = true;
+        $scope.types = CharactService.types;
         ApiService.charact.getById($stateParams.id).then(function(response){
-            console.log(response.data);
+            if(response.data != -1 && response.data[0]){
+                $scope.charact = response.data[0];
+                if($scope.charact.additional){
+                    $scope.charact.additional = angular.fromJson($scope.charact.additional);
+                }
+            }
+            else{
+                alert('Ошибка получения данных характеристики!');
+            }
+            $scope.loading = false;
         }, function(err){
             console.log(err);
             alert('Не удалось получить данные по характеристике');
+            $scope.loading = false;
         });
-//
-//        $scope.charact = angular.copy(CharactService.getById());
-//        if($scope.charact && $scope.charact.additional){
-//            $scope.charact.additional = angular.fromJson($scope.charact.additional);
-//        }
-//        $scope.addAdditional = function(){
-//            $scope.charact.additional = $scope.charact.additional || [];
-//            $scope.charact.additional.push('');
-//        };
-//        $scope.save = save;
-//        $scope.types = CharactService.types;
-//
-//        function save(){
-//            var temp = $scope.charact.additional;
-//            $scope.charact.additional = angular.toJson($scope.charact.additional);
-//            CharactService.save($scope.charact);
-//            alert("Характеристика сохранена!");
-//            $scope.charact.additional = temp;
-//        }
+        $scope.addAdditional = function(){
+            $scope.charact.additional = $scope.charact.additional || [];
+            $scope.charact.additional.push('');
+        };
+        $scope.save = save;
+        function save(charact){
+            charact = angular.copy(charact);
+            charact.additional = angular.toJson(charact.additional);
+            ApiService.charact.save(charact).then(function(response){
+                alert("Характеристика сохранена!");
+                console.log(response);
+            });
+        }
     }
 })();

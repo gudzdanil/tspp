@@ -12,13 +12,15 @@
         ApiService.charact.getAll().then(function(response){
             if(response.data != -1) {
                 $scope.characts = response.data;
-                $scope.loading = false;
             }
+            else{
+                alert("Ошибка получения списка характеристик!");
+            }
+            $scope.loading = false;
         }, function(err){
             console.log(err);
             alert("Ошибка получения списка характеристик!");
             $scope.loading = false;
         });
-//        $scope.characts = CharactService.precreated;
     }
 })();
