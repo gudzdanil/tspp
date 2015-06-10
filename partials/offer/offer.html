@@ -1,5 +1,5 @@
 <div>
-    <h2>{{offer.name}}</h2>
+    <h2><input type="text" ng-model="offer.name"/></h2>
 
     <div class="col-sm-3">
         <img ng-src="{{offer.img}}" alt="product image" style="width: 100%;"/>
@@ -7,22 +7,22 @@
     <div class="col-sm-9">
         <dl class="dl-horizontal">
             <dt>Каталог</dt>
-            <dd>{{catalog}}</dd>
+            <dd><select ng-options="cat.id as cat.name for cat in catalogs" class="form-control" ng-model="offer.catalog"></select></dd>
         </dl>
         <dl class="dl-horizontal">
             <dt>Бренд</dt>
-            <dd>{{offer.brand}}</dd>
+            <dd><input type="text" ng-model="offer.brand" class="form-control"/> </dd>
         </dl>
         <dl class="dl-horizontal">
             <dt>Цена</dt>
-            <dd>{{offer.price}} грн.</dd>
+            <dd><input type="text" ng-model="offer.price" class="form-control"/> </dd>
         </dl>
         <div ng-repeat="char in characts track by $index">
             <dl-charact input-type="char" value="values[char.id]" />
         </div>
         <dl class="dl-horizontal">
             <dt><span ng-click="log()" title="Добавить в логгер" class="glyphicon glyphicon-pushpin"></span>Дополнительная<br/>информация </dt>
-            <dd>{{offer.additional}}</dd>
+            <dd><textarea class="form-control" ng-model="offer.additional"></textarea></dd>
         </dl>
     </div>
 </div>

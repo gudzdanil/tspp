@@ -105,6 +105,16 @@
                 templateUrl: tplFolderPath + '/offer/offer.html',
                 url: '/offer/:id',
                 controller: 'OfferCtrl'
+            })
+            .state('main.myoffers', {
+                templateUrl: tplFolderPath + '/offer/myoffers.html',
+                url: '/myoffers',
+                controller: 'MyoffersCtrl'
+            })
+            .state('main.leaveoffer', {
+                templateUrl: tplFolderPath + '/offer/offer.html',
+                url: '/offer/:id',
+                controller: 'OfferCtrl'
             });
 
         $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';

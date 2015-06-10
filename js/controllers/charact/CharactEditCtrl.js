@@ -22,5 +22,19 @@
             alert("Ошибка получения списка характеристик!");
             $scope.loading = false;
         });
+        $scope.remove = function(id, index){
+            ApiService.charact.remove(id).then(function(response){
+                if(response.data != -1){
+                    $scope.characts.splice(index, 1);
+                }
+                else{
+                    alert('Не удалось удалить характеристику!');
+                }
+                console.log(response.data);
+            }, function(err){
+                console.log(err);
+                alert('Не удалось удалить характеристику!');
+            });
+        }
     }
 })();

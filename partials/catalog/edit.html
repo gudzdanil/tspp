@@ -1,7 +1,8 @@
 <div>
     <ul style="margin: 20px 0;">
-        <li ng-repeat="catalog in catalogs">
+        <li ng-repeat="catalog in catalogs track by $index">
             {{catalog.name}} <a class="glyphicon glyphicon-pencil" ui-sref="main.catalog.editC({id: catalog.id})"></a>
+            <span class="glyphicon glyphicon-remove" ng-click="remove(catalog.id, $index)"></span>
         </li>
     </ul>
 </div>

@@ -5,16 +5,33 @@
         .module('gifts')
         .controller('CatalogEditExactCtrl', CatalogEditExactCtrl);
 
-    CatalogEditExactCtrl.$inject = ['$scope', 'CatalogService', 'CharactService', '$stateParams'];
+    CatalogEditExactCtrl.$inject = ['$scope', '$stateParams', 'ApiService'];
 
-    function CatalogEditExactCtrl($scope, CatalogService, CharactService, $stateParams){
-        $scope.catalog = angular.copy(CatalogService.getById($stateParams.id));
-        var i, obj = {};
-        for(i in $scope.catalog.characts){
-            obj[$scope.catalog.characts[i]] = 1;
-        }
-        $scope.catalog.characts = obj;
-        $scope.characts = CharactService.precreated;
+    function CatalogEditExactCtrl($scope, $stateParams, ApiService){
+        $scope.loading = true;
+        ApiService.catalog.getById($stateParams.id).then(function(response){
+            $scope.loading = false;
+            $scope.catalog = response[0];
+
+            var i, obj = {};
+            for(i in $scope.catalog.characts){
+                obj[$scope.catalog.characts[i]] = 1;
+            }
+            $scope.catalog.characts = obj;
+
+        }, function(err){
+            console.log(err);
+            alert('Не удалось загрузить данные каталога!');
+            $scope.loading = false;
+        });
+
+        ApiService.charact.getAll().then(function(response){
+            $scope.characts = response;
+        }, function(err){
+            console.log(err);
+            alert('Не удалось загрузить список характеристик!');
+        });
+
         $scope.save = save;
 
         function save(){
@@ -26,8 +43,13 @@
             }
             var res = angular.copy($scope.catalog);
             res.characts = arr;
-            CatalogService.save(res);
-            alert("Каталог сохранен");
+            res.id = +res.id;
+            ApiService.catalog.save(res).then(function(response){
+                alert("Каталог сохранен");
+            }, function(err){
+                alert("Не удалось сохранить каталог");
+                console.log(err);
+            });
         }
     }
 })();

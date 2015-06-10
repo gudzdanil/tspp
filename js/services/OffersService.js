@@ -64,6 +64,7 @@
                     values: [
                         1, 2
                     ],
+                    status: 0,
                     additional: "Процессор: 1ГГц, тип экрана: сенсорный"
                 },
                 {
@@ -72,10 +73,11 @@
                     brand: 'LG',
                     img: 'http://brain.com.ua/static/images/articles_icons/239.jpg',
                     price: 12000,
-                    catalog: 3,
+                    catalog: 6,
                     values: [
                         3
                     ],
+                    status: 1,
                     additional: "Цвет: черный, порт: HDMI"
                 }
             ]

@@ -5,7 +5,7 @@
         <select class="form-control" ng-model="value.val" ng-switch-when="select" ng-options="option for option in inputType.additional">
         </select>
         <input class="form-control" type="number" ng-switch-when="number" ng-model="value.val"/>
-        <textarea class="form-control" ng-switch-when="text" cols="30" rows="10" ng-model="value.val"></textarea>
+        <textarea class="form-control" ng-switch-when="text" ng-model="value.val"></textarea>
         <input class="form-control" type="checkbox" ng-model="value.val" ng-switch-when="bool"/>
         <div ng-switch-when="range">
             <input type="number" ng-model="value.val[0]"/> -

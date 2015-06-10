@@ -40,6 +40,12 @@
                     <li ng-if="isAuthenticated('admin')" ui-sref-active="active">
                         <a href="#" role="button" ui-sref="main.offers">Заявки <span class="badge" ng-bind="offers.length"></span></a>
                     </li>
+                    <li ng-if="isAuthenticated('seller')" ui-sref-active="active">
+                        <a href="#" role="button" ui-sref="main.myoffers">Оставленные заявки</a>
+                    </li>
+                    <li ng-if="isAuthenticated('seller')" ui-sref-active="active">
+                        <a href="#" role="button" ui-sref="main.leaveoffer">Предложить подарок</a>
+                    </li>
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">

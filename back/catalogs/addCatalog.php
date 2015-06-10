@@ -1,5 +1,5 @@
 <?php
-	function addCtalog(){
+	function addCatalog(){
 
 
 	include("../connect.php");
@@ -12,7 +12,7 @@
 	if(mysqli_query($mysql,$sql)){
 		$id = mysqli_insert_id($mysql);
 		for($i = 0;$i< count($POST->characts);$i++){
-			$sql = "INSERT INTO `catalogtorules`(`id_catalog`, `id_rule`) VALUES ('$id','$POST->characts[$i]')";
+			$sql = "INSERT INTO `catalogtorules`(`id_catalog`, `id_rule`) VALUES ('$id','".$POST->characts[$i]."')";
 			mysqli_query($mysql,$sql);
 		}
 
@@ -23,5 +23,5 @@
 	}
 	};
 
-	addCtalog();
+	addCatalog();
 ?>

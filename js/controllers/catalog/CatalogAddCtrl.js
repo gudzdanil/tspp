@@ -5,10 +5,17 @@
         .module('gifts')
         .controller('CatalogAddCtrl', CatalogAddCtrl);
 
-    CatalogAddCtrl.$inject = ['$scope', 'CatalogService', 'CharactService'];
+    CatalogAddCtrl.$inject = ['$scope', 'CatalogService', 'CharactService', 'ApiService'];
 
-    function CatalogAddCtrl($scope, CatalogService, CharactService){
-        $scope.characts = CharactService.precreated;
+    function CatalogAddCtrl($scope, CatalogService, CharactService, ApiService){
+        $scope.loading = true;
+        ApiService.charact.getAll().then(function(response){
+            $scope.characts = response;
+        }, function(err){
+            console.log(err);
+            alert("Ошибка получения списка характеристик!");
+            $scope.loading = false;
+        });
         $scope.save = save;
 
         function save(catalog){
@@ -20,9 +27,13 @@
             }
             var res = angular.copy(catalog);
             res.characts = arr;
-            CatalogService.add(res);
-            alert("Новая категория добавлена!");
-            $scope.catalog = {};
+            ApiService.catalog.add(res).then(function(response){
+                alert("Новая категория добавлена!");
+                $scope.catalog = {};
+            }, function(err){
+                alert('Не удалось сохранить новую категорию!');
+                console.log(err);
+            });
         }
     }
 })();

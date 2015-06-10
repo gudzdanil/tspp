@@ -26,7 +26,7 @@
 				}
 			}
 		}
-		var_dump($result);
+		echo json_encode($result);
 	}
 	else{
 		echo json_encode(-1);	

@@ -10,18 +10,21 @@
     function CatalogEditCtrl($scope, ApiService){
         $scope.loading = true;
         ApiService.catalog.getAll().then(function(response){
-            if(response.data != -1){
-
-            }
-            else{
-                alert('Ошибка получения списка каталогов!');
-            }
+            $scope.catalogs = response;
             $scope.loading = false;
         }, function(err){
             console.log(err);
             alert('Ошибка получения списка каталогов!');
             $scope.loading = false;
         });
-        $scope.catalogs = CatalogService.precreated;
+
+        $scope.remove = function(id, index){
+            ApiService.catalog.remove(+id).then(function(response){
+                $scope.catalogs.splice(index, 1);
+            }, function(err){
+                console.log(err);
+                alert('Не удалось удалить характеристику!');
+            });
+        }
     }
 })();

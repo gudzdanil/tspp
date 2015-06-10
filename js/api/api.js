@@ -6,9 +6,9 @@
         .value('API_LINK', 'back/')
         .factory('ApiService', ApiService);
 
-    ApiService.$inject = ['API_LINK', '$http', 'AuthData'];
+    ApiService.$inject = ['API_LINK', '$http', 'AuthData', 'AjaxService'];
 
-    function ApiService(API_LINK, $http, AuthData){
+    function ApiService(API_LINK, $http, AuthData, AjaxService){
         return {
             login: login,
             register: register,
@@ -18,9 +18,41 @@
                 getAll: getCharacts,
                 getById: getCharact,
                 add: addCharact,
-                save: saveCharact
+                save: saveCharact,
+                remove: removeCharact
+            },
+            catalog: {
+                add: addCatalog,
+                getAll: getCatalogs,
+                remove: removeCatalog,
+                getById: getCatalog,
+                save: saveCatalog
             }
         };
+
+        function saveCatalog(catalog){
+            return AjaxService.post('catalogs/editCatalog', catalog);
+        }
+
+        function getCatalog(id){
+            return AjaxService.post('catalogs/getCatalogById', {id: id});
+        }
+
+        function removeCatalog(id){
+            return AjaxService.post('catalogs/deleteCatalog', {id: id});
+        }
+
+        function getCatalogs(){
+            return AjaxService.post('catalogs/getAllCatalogs');
+        }
+
+        function addCatalog(data){
+            return AjaxService.post('catalogs/addCatalog', data);
+        }
+
+        function removeCharact(id){
+            return $http.post(API_LINK + 'rules/deleteRule.php', {id: id});
+        }
 
         function saveCharact(charact){
             return $http.post(API_LINK + 'rules/editRule.php', charact);
@@ -31,12 +63,12 @@
         }
 
         function getCharacts(){
-            return $http.get(API_LINK + 'rules/getAllRules.php');
+            return AjaxService.post('rules/getAllRules');
         }
 
         function checkAuth(){
             return $http.get(API_LINK + 'session.php').then(function(response){
-                if(response.data !== -1){
+                if(response.data != -1){
                     AuthData.setData(response.data);
                 }
             }, function(err){
@@ -48,7 +80,7 @@
             data = angular.copy(data);
             delete data.pass2;
             return $http.post(API_LINK + 'reg.php', data).then(function(response){
-                if(response == 1){
+                if(response != -1){
                     alert("Вы успешно зарегистрировались")
                 }
                 else{
@@ -60,7 +92,7 @@
         }
         function login(data) {
             return $http.post(API_LINK + 'logIn.php', data).then(function(response){
-                if(response.data !== -1){
+                if(response.data != -1){
                     AuthData.setData(response.data);
                 }
                 else{
