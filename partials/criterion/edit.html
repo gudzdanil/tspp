@@ -1,7 +1,8 @@
 <div>
     <ul style="margin: 20px 0;">
-        <li ng-repeat="criterion in criterions">
-            {{criterion.name}} <a class="glyphicon glyphicon-pencil" ui-sref="main.criterion.editC({id: criterion.id})"></a>
+        <li ng-repeat="criterion in criterions track by $index">
+            {{criterion.name}} <a class="glyphicon glyphicon-pencil" ui-sref="main.criterion.editC({id: criterion.id_categorie})"></a>
+            <span class="glyphicon glyphicon-remove" ng-click="remove(criterion.id_categorie, $index)"></span>
         </li>
     </ul>
 </div>

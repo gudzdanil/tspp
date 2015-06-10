@@ -27,8 +27,35 @@
                 remove: removeCatalog,
                 getById: getCatalog,
                 save: saveCatalog
+            },
+            criterion: {
+                getAll: getCriterions,
+                getById: getCriterion,
+                add: addCriterion,
+                save: saveCriterion,
+                remove: removeCriterion
             }
         };
+
+        function getCriterions(){
+            return AjaxService.post('categories/getAllCategories');
+        }
+
+        function getCriterion(id){
+            return AjaxService.post('categories/getCategorieById', {id: +id});
+        }
+
+        function addCriterion(crit){
+            return AjaxService.post('categories/addCategorie', crit);
+        }
+
+        function saveCriterion(crit){
+            return AjaxService.post('categories/editCategorie', crit);
+        }
+
+        function removeCriterion(id){
+            return AjaxService.post('categories/deleteCategorie', {id: +id});
+        }
 
         function saveCatalog(catalog){
             return AjaxService.post('catalogs/editCatalog', catalog);
