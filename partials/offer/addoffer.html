@@ -1,0 +1,38 @@
+<div>
+    <div>
+        <dl class="dl-horizontal">
+            <dt>Название</dt>
+            <dd><input type="text" ng-model="offer.name" class="form-control"/></dd>
+        </dl>
+        <dl class="dl-horizontal">
+            <dt>Адрес изображения</dt>
+            <dd><input type="text" ng-model="offer.img" class="form-control"/></dd>
+        </dl>
+        <dl class="dl-horizontal">
+            <dt>Ссылка на товар</dt>
+            <dd><input type="text" ng-model="offer.url" class="form-control"/></dd>
+        </dl>
+        <dl class="dl-horizontal">
+            <dt>Каталог</dt>
+            <dd><select ng-options="cat.id as cat.name for cat in catalogs" class="form-control" ng-model="offer.catalog"></select></dd>
+        </dl>
+        <dl class="dl-horizontal">
+            <dt>Бренд</dt>
+            <dd><input type="text" ng-model="offer.brand" class="form-control"/> </dd>
+        </dl>
+        <dl class="dl-horizontal">
+            <dt>Цена</dt>
+            <dd><input type="text" ng-model="offer.price" class="form-control"/> </dd>
+        </dl>
+        <div ng-repeat="char in characts track by $index">
+            <dl-charact input-type="char" value="values[char.id]" />
+        </div>
+        <dl class="dl-horizontal">
+            <dt>Дополнительная<br/>информация </dt>
+            <dd><textarea class="form-control" ng-model="offer.additional"></textarea></dd>
+        </dl>
+    </div>
+    <p class="text-center">
+        <button class="btn btn-default" ng-click="save()">Сохранить</button>
+    </p>
+</div>

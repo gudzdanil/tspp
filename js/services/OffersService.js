@@ -47,9 +47,16 @@
             }
         }
 
-        function add(charact){
-            generated.push(charact);
-            charact.id = generated.length;
+        function add(offer){
+            var i;
+            var values = [];
+            for(i in offer.values){
+                values.push(ValuesService.add(offer.values[i]));
+            }
+            offer.values = values;
+            offer.status = 0;
+            generated.push(offer);
+            offer.id = generated.length;
         }
 
         function generate(){
@@ -60,6 +67,7 @@
                     brand: 'Samsung',
                     img: 'http://cdn.theunlockr.com/wp-content/uploads/2014/09/Unlock-the-Samsung-Galaxy-S4.jpg',
                     price: 5000,
+                    url: 'iogfwoihfvk',
                     catalog: 2,
                     values: [
                         1, 2
@@ -72,6 +80,7 @@
                     name: 'LG smart tv',
                     brand: 'LG',
                     img: 'http://brain.com.ua/static/images/articles_icons/239.jpg',
+                    url: 'aldsjflasdf',
                     price: 12000,
                     catalog: 6,
                     values: [

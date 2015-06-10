@@ -112,9 +112,9 @@
                 controller: 'MyoffersCtrl'
             })
             .state('main.leaveoffer', {
-                templateUrl: tplFolderPath + '/offer/offer.html',
-                url: '/offer/:id',
-                controller: 'OfferCtrl'
+                templateUrl: tplFolderPath + '/offer/addoffer.html',
+                url: '/leaveoffer',
+                controller: 'LeaveofferCtrl'
             });
 
         $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';

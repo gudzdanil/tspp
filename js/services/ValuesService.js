@@ -13,7 +13,8 @@
             precreated: generated,
             getById: getById,
             remove: remove,
-            getNameVal: getNameVal
+            getNameVal: getNameVal,
+            add: add
         };
 
         function generate(){
@@ -42,6 +43,12 @@
                 name: CharactService.getById(obj.charact).name,
                 val: obj.val
             };
+        }
+
+        function add(value){
+            generated.push(value);
+            value.id = generated.length;
+            return value.id;
         }
 
         function remove(id){
