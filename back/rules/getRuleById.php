@@ -7,20 +7,19 @@
 	$POST = json_decode($postdata);
 
 
-	$sql = "SELECT `id,`name`, `type`, `additional` FROM `rules` WHERE `id` = '$POST->id'";
+	$sql = "SELECT `id`,`name`, `type`, `additional` FROM `rules` WHERE `id` = '$POST->id'";
 
-	$rez = mysqli_query($mysql,$sql;
-
-	if(mysqli_num_rows($rez)>0){
-		$result = array();
-		while($r = mysqli_fetch_assoc($rez)){
-			$result[] = $r;
+	if($rez = mysqli_query($mysql,$sql)){
+		if(mysqli_num_rows($rez)>0){
+			$result = array();
+			while($r = mysqli_fetch_assoc($rez)){
+				$result[] = $r;
+			}
 		}
 	}
 	else{
 		$result = -1;
 	}
-
 	echo json_encode($result);
 
 	};
