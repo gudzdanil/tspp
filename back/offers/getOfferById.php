@@ -21,7 +21,7 @@
 			if($rez = mysqli_query($mysql,$sql)){
 				if(mysqli_num_rows($rez)>0){
 					while($r = mysqli_fetch_assoc($rez)){
-						$result[$i]['values'][] = $r['id_rule'];
+						$result[$i]['values'][] = $r;
 					}
 				}
 			}
