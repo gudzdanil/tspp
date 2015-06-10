@@ -1,5 +1,5 @@
 <div style="margin: 20px 0">
-    <form class="col-md-6">
+    <form class="col-md-7">
         <button ng-show="criterion.link" ng-click="copyCharact()" class="btn btn-success">
             Использовать значения выбранной характеристики
         </button>
@@ -22,14 +22,14 @@
                 <button class="btn btn-success" ng-click="addAdditional()">Добавить значение</button>
             </div>
         </div>
-        <input type="button" ng-click="save()" class="btn btn-default" value="Сохранить"/>
+        <input type="button" ng-click="save(criterion)" class="btn btn-default" value="Сохранить"/>
     </form>
-    <form class="col-md-6" name="linkedCharact">
+    <form class="col-md-5" name="linkedCharact">
         <h4>Привязать к характеристике</h4>
         <ul class="list-unstyled">
             <li ng-repeat="charact in characts">
                 <label>
-                    <input type="radio" ng-model="criterion.link" name="charact" ng-value="{{charact.id}}"/>
+                    <input type="radio" ng-model="criterion.id_categorie" name="charact" ng-value="{{charact.id}}"/>
                     {{charact.name}} | {{types[charact.type]}}
                 </label>
             </li>
