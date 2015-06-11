@@ -3,31 +3,31 @@
 
     angular
         .module('gifts')
-        .controller('OfferCtrl', OfferCtrl);
+        .controller('GiftCtrl', GiftCtrl);
 
-    OfferCtrl.$inject = ['$scope', '$stateParams', '$timeout', 'ApiService', 'AuthData'];
+    GiftCtrl.$inject = ['$scope', '$stateParams', '$timeout', 'ApiService', 'AuthData'];
 
-    function OfferCtrl($scope, $stateParams, $timeout, ApiService, AuthData){
-        var i, val, char, offer;
-        ApiService.offer.getById($stateParams.id).then(function(response){
-            $scope.offer = offer = response[0];
+    function GiftCtrl($scope, $stateParams, $timeout, ApiService, AuthData){
+        var i, char, gift;
+        ApiService.gift.getById($stateParams.id).then(function(response){
+            $scope.gift = gift = response[0];
             ApiService.catalog.getAll().then(function(response){
                 $scope.catalogs = response;
-                updateCharacts($scope.offer.catalog);
+                updateCharacts($scope.gift.catalog);
             }, function(err){
                 console.log(err);
                 alert("Ошибка получения списка каталогов!");
             });
             $scope.values = {};
-            for(i in offer.values){
-                $scope.values[offer.values[i].id_rule] = {
-                    charact: offer.values[i].id_rule,
-                    val: offer.values[i].value
+            for(i in gift.values){
+                $scope.values[gift.values[i].id_rule] = {
+                    charact: gift.values[i].id_rule,
+                    val: gift.values[i].value
                 };
             }
             $scope.characts = [];
-            offer.catalog = offer.catalog.toString();
-            $scope.$watch('offer.catalog', updateCharacts);
+            gift.catalog = gift.catalog.toString();
+            $scope.$watch('gift.catalog', updateCharacts);
             function updateCharacts(newVal, oldVal){
                 $scope.characts = [];
                 if(oldVal && oldVal != newVal){
@@ -65,19 +65,19 @@
             console.log(err);
         });
 
-        function prepareOffer(){
+        function prepareGift(){
             var arr = [];
             for(i in $scope.values) {
                 arr.push($scope.values[i]);
             }
-            $scope.offer.values = arr;
-            $scope.offer.id = +$scope.offer.id;
-            $scope.offer.user = +AuthData.data.id;
+            $scope.gift.values = arr;
+            $scope.gift.id = +$scope.gift.id;
+            $scope.gift.user = +AuthData.data.id;
         }
 
         $scope.save = function(){
-            prepareOffer();
-            ApiService.offer.save($scope.offer).then(function(response){
+            prepareGift();
+            ApiService.gift.save($scope.gift).then(function(response){
                 alert('Заявка сохранена!');
             }, function(err){
                 console.log(err);
@@ -85,19 +85,19 @@
             });
         };
         $scope.confirm = function(){
-            if($scope.offer.status == 1){
+            if($scope.gift.status == 1){
                 alert('Заявка уже подтверждена!');
                 return;
             }
-            prepareOffer();
+            prepareGift();
 
-            ApiService.offer.save($scope.offer).then(function(response){
+            ApiService.gift.save($scope.gift).then(function(response){
                 $scope.msg = "Сохранена";
-                ApiService.gift.create($scope.offer.id).then(function(response){
+                ApiService.gift.create($scope.gift.id).then(function(response){
                     $scope.msg = "Подтверждена";
                     $timeout(function(){$scope.msg = "";}, 5000);
-                    ApiService.offer.changeStatus($scope.offer.id, 1).then(function(){
-                        $scope.offer.status = 1;
+                    ApiService.gift.changeStatus($scope.gift.id, 1).then(function(){
+                        $scope.gift.status = 1;
                     }, function(err){
                         console.log(err);
                         alert("Ошибка изменения статуса заявки!");
@@ -113,23 +113,23 @@
         };
 
         $scope.cancel = function(){
-            if($scope.offer.status == -1){
+            if($scope.gift.status == -1){
                 alert('Заявка уже отменена!');
                 return;
             }
-            prepareOffer();
+            prepareGift();
 
-            ApiService.offer.save($scope.offer).then(function(response){
+            ApiService.gift.save($scope.gift).then(function(response){
                 $scope.msg = "Сохранена";
-                if($scope.offer.status == 1) {
-                    ApiService.gift.removeByOfferId($scope.offer.id).then(function (response) {
+                if($scope.gift.status == 1) {
+                    ApiService.gift.removeByGiftId($scope.gift.id).then(function (response) {
 
-                        ApiService.offer.changeStatus($scope.offer.id, -1).then(function () {
+                        ApiService.gift.changeStatus($scope.gift.id, -1).then(function () {
                             $scope.msg = "Отменена";
                             $timeout(function () {
                                 $scope.msg = "";
                             }, 5000);
-                            $scope.offer.status = -1;
+                            $scope.gift.status = -1;
                         }, function (err) {
                             console.log(err);
                             alert("Ошибка отмены заявки!");
@@ -140,12 +140,12 @@
                     });
                 }
                 else{
-                    ApiService.offer.changeStatus($scope.offer.id, -1).then(function () {
+                    ApiService.gift.changeStatus($scope.gift.id, -1).then(function () {
                         $scope.msg = "Отменена";
                         $timeout(function () {
                             $scope.msg = "";
                         }, 5000);
-                        $scope.offer.status = -1;
+                        $scope.gift.status = -1;
                     }, function (err) {
                         console.log(err);
                         alert("Ошибка отмены заявки!");

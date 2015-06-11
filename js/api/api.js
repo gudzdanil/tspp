@@ -33,9 +33,83 @@
                 getById: getCriterion,
                 add: addCriterion,
                 save: saveCriterion,
-                remove: removeCriterion
+                remove: removeCriterion,
+                getByCharactId: getCriterionByCharactId
+            },
+            offer: {
+                getByUser: getOffersByUser,
+                getById: getOffer,
+                getAll: getOffers,
+                add: addOffer,
+                save: saveOffer,
+                remove: removeOffer,
+                getCountById: getOfferCountById,
+                changeStatus: changeOfferStatus,
+                getCount: getOffersCount
+            },
+            gift: {
+                create: createGift,
+                removeByOfferId: removeGiftByOfferId,
+                getAll: getAllGifts,
+                getById: getGiftById
             }
         };
+
+        function getGiftById(id){
+            return AjaxService.post('gifts/getGiftById', {id: id});
+        }
+
+        function getAllGifts(){
+            return AjaxService.post('gifts/getAllGifts');
+        }
+
+        function getCriterionByCharactId(id){
+            return AjaxService.post('categories/getByCharactId', {id_rule: id});
+        }
+
+        function createGift(idOffer){
+            return AjaxService.post('gifts/addGift', {offer_id: idOffer});
+        }
+
+        function removeGiftByOfferId(idOffer){
+            return AjaxService.post('gifts/deleteGiftByOfferId', {offer_id: idOffer});
+        }
+
+        function getOffersCount(){
+            return AjaxService.post('offers/getCount');
+        }
+
+        function getOffers(){
+            return AjaxService.post('offers/getOffers');
+        }
+
+        function changeOfferStatus(id, status){
+            return AjaxService.post('offers/setStatus', {id: id, status: status});
+        }
+
+        function getOfferCountById(id){
+            return AjaxService.post('offers/getCountById', {id: id});
+        }
+
+        function addOffer(offer){
+            return AjaxService.post('offers/addOffer', offer);
+        }
+
+        function saveOffer(offer){
+            return AjaxService.post('offers/editOffer', offer);
+        }
+
+        function removeOffer(id){
+            return AjaxService.post('offers/deleteOffer', {id: +id});
+        }
+
+        function getOffer(id){
+            return AjaxService.post('offers/getOfferById', {id: +id});
+        }
+
+        function getOffersByUser(id){
+            return AjaxService.post('offers/getOffersByUserId', {user_id : +id});
+        }
 
         function getCriterions(){
             return AjaxService.post('categories/getAllCategories');
@@ -131,7 +205,10 @@
             });
         }
         function logout(){
-            AuthData.clearData();
+            $http.get(API_LINK + 'logOut.php').then(function(){
+                AuthData.clearData();
+            });
+
         }
 
         function addCharact(data){

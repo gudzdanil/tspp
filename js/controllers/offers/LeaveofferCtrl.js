@@ -5,9 +5,9 @@
         .module('gifts')
         .controller('LeaveofferCtrl', LeaveofferCtrl);
 
-    LeaveofferCtrl.$inject = ['$scope', 'OffersService', 'CharactService', '$rootScope', 'ApiService'];
+    LeaveofferCtrl.$inject = ['$scope', 'OffersService', 'CharactService', '$rootScope', 'ApiService', 'AuthData'];
 
-    function LeaveofferCtrl($scope, OffersService, CharactService, $rootScope, ApiService){
+    function LeaveofferCtrl($scope, OffersService, CharactService, $rootScope, ApiService,AuthData){
         var i, val, char;
         var offer = {
             name: '',
@@ -60,12 +60,20 @@
             }
         }
         function save(){
-            console.log($scope.offer, $scope.values);
+            $scope.offer.user = AuthData.data.id;
             $scope.offer.values = [];
             for(i in $scope.values){
                 $scope.offer.values.push($scope.values[i]);
             }
-            OffersService.add($scope.offer);
+            ApiService.offer.add($scope.offer).then(function(response){
+                alert('Ваша заявка успешно сохранена');
+                $scope.offer = {};
+//                $scope.values = {};
+            }, function(err){
+                alert('Ошибка сохранения заявки!');
+                console.log(err);
+            });
+//            OffersService.add($scope.offer);
         }
     }
 })();

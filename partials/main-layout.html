@@ -38,7 +38,7 @@
                         </ul>
                     </li>
                     <li ng-if="isAuthenticated('admin')" ui-sref-active="active">
-                        <a href="#" role="button" ui-sref="main.offers">Заявки <span class="badge" ng-bind="offers.length"></span></a>
+                        <a href="#" role="button" ui-sref="main.offers">Заявки <span class="badge" ng-bind="offers.count" ng-show="offers.count"></span></a>
                     </li>
                     <li ng-if="isAuthenticated('seller')" ui-sref-active="active">
                         <a href="#" role="button" ui-sref="main.myoffers">Оставленные заявки</a>
@@ -62,8 +62,8 @@
         </div><!-- /.container-fluid -->
     </nav>
     <div class="container">
-        <div ng-class="{'col-xs-8': isAuthenticated('admin')}" ui-view></div>
-        <div ng-if="isAuthenticated('admin')" class="col-xs-4" ng-include="'partials/logger.html'">
+        <div ng-class="{'col-xs-8': showLog}" ui-view></div>
+        <div ng-if="showLog" class="col-xs-4" ng-include="'partials/logger.html'">
         </div>
 
     </div>

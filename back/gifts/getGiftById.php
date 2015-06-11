@@ -7,7 +7,7 @@
 	$postdata = file_get_contents("php://input");
 	$POST = json_decode($postdata);
 
-	$sql = "SELECT `id`, `offer_id`, `date` FROM `gifts`";
+	$sql = "SELECT `id`, `offer_id`, `date` FROM `gifts` WHERE `id` = '$POST->id'";
 
 	if($rez = mysqli_query($mysql,$sql)){
 		if(mysqli_num_rows($rez)>0){

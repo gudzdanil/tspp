@@ -7,14 +7,15 @@
 	$postdata = file_get_contents("php://input");
 	$POST = json_decode($postdata);
 
-	$sql = "UPDATE `offer` `name`='$POST->name',`id_user`='$POST->id_user',`brand`='$POST->brand',`img`=='$POST->img',`price`=='$POST->price',`url`='$POST->url',`catalog`='$POST->catalog',`status`='$POST->status',`additional`='$POST->additional' WHERE `id`='$POST->id'";
+	$sql = "UPDATE `offer` SET `name`='$POST->name',`id_user`='$POST->id_user',`brand`='$POST->brand',`img`='$POST->img',`price`='$POST->price',`url`='$POST->url',`catalog`='$POST->catalog',`status`='$POST->status',`additional`='$POST->additional' WHERE `id`='$POST->id'";
+
 	if(mysqli_query($mysql,$sql)){
 		$id = $POST->id;
 		$sql = "DELETE FROM `offertorule` WHERE `id_offer`='$id'";
 		mysqli_query($mysql,$sql);
 				
-		for($i = 0;$i< count($POST->characts);$i++){
-			$sql = "INSERT INTO `offertorule`(`id_offer`, `id_rule`, `value`) VALUES ('$id','".$POST->charact[$i]."','".$POST->val[$i]."')";
+		for($i = 0;$i< count($POST->values);$i++){
+			$sql = "INSERT INTO `offertorule`(`id_offer`, `id_rule`, `value`) VALUES ('$id','".$POST->values[$i]->charact."','".$POST->values[$i]->val."')";
 			mysqli_query($mysql,$sql);
 		}
 

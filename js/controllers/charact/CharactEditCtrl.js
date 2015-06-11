@@ -10,12 +10,7 @@
     function CharactEditCtrl($scope, ApiService){
         $scope.loading = true;
         ApiService.charact.getAll().then(function(response){
-            if(response.data != -1) {
-                $scope.characts = response.data;
-            }
-            else{
-                alert("Ошибка получения списка характеристик!");
-            }
+            $scope.characts = response;
             $scope.loading = false;
         }, function(err){
             console.log(err);

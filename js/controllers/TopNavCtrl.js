@@ -5,14 +5,15 @@
         .module('gifts')
         .controller('TopNavCtrl', TopNavCtrl);
 
-    TopNavCtrl.$inject = ['$scope', 'AuthData', 'ApiService', 'GlobalService', 'OffersService'];
+    TopNavCtrl.$inject = ['$scope', 'AuthData', 'ApiService', 'GlobalService', '$rootScope', '$state'];
 
-    function TopNavCtrl($scope, AuthData, ApiService, GlobalService, OffersService){
+    function TopNavCtrl($scope, AuthData, ApiService, GlobalService, $rootScope, $state){
         $scope.userData = AuthData.data;
         $scope.isAuthorized = AuthData.isAuthorized;
         $scope.isAuthenticated = AuthData.isAuthenticated;
         $scope.logout = ApiService.logout;
         $scope.getRolePresentation = GlobalService.getRolePresentation;
-        $scope.offers = OffersService.precreated;
+        $scope.offers = $rootScope.offers;
+        $scope.showLog = $scope.isAuthenticated('admin') && $state.current.name !== "main.home";
     }
 })();

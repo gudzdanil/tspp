@@ -45,6 +45,7 @@
                 id : criterion.id_categorie,
                 name: criterion.name,
                 type: criterion.type,
+                link: criterion.id_rule,
                 additional: angular.toJson(criterion.additional)
             }
             ApiService.criterion.save(res).then(function(response){
@@ -55,7 +56,7 @@
             });
         }
         function copyCharact(){
-            var charact = charactById($scope.criterion.link);
+            var charact = charactById($scope.criterion.id_rule);
             $scope.criterion.name = charact.name;
             $scope.criterion.type = charact.type;
             $scope.criterion.additional = angular.fromJson(charact.additional);

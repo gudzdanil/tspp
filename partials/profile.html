@@ -1,0 +1,13 @@
+<div class="jumbotron">
+    <h2>{{data.lastname}} {{data.name}}</h2>
+    <h4>{{data.login}} <span class="label label-default">id : {{data.id}}</span></h4>
+    <p>Роль: {{roleToString(data.role)}}</p>
+    <p>Email: {{data.email}}</p>
+    <p ng-if="data.role=='seller'">
+        Оставлено заявок: <span ng-bind="offers.all">?</span>
+        <span>( <span class="label label-success" title="Подтверждены">{{offers.confirmed}}</span>
+        <span class="label label-warning" title="На рассмотрении">{{offers.wait}}</span>
+        <span class="label label-danger" title="Отменены">{{offers.canceled}}</span> )
+        </span>
+    </p>
+</div>

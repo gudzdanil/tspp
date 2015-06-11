@@ -106,6 +106,16 @@
                 url: '/offer/:id',
                 controller: 'OfferCtrl'
             })
+            .state('main.gift', {
+                templateUrl: tplFolderPath + '/gift/gift.html',
+                url: '/gift/:id',
+                controller: 'GiftCtrl'
+            })
+            .state('main.myoffer', {
+                templateUrl: tplFolderPath + '/offer/myoffer.html',
+                url: '/myoffer/:id',
+                controller: 'MyofferCtrl'
+            })
             .state('main.myoffers', {
                 templateUrl: tplFolderPath + '/offer/myoffers.html',
                 url: '/myoffers',
@@ -121,14 +131,26 @@
     }
 
 
-    appRun.$inject = ['$rootScope', 'AuthData', '$state', 'ApiService'];
-    function appRun($rootScope, AuthData, $state, ApiService){
+    appRun.$inject = ['$rootScope', 'AuthData', '$state', 'ApiService', '$interval'];
+    function appRun($rootScope, AuthData, $state, ApiService, $interval){
         ApiService.checkAuth().then(function(){
             checkAuthorization(null, $state.current, null);
             $rootScope.$on( '$stateChangeStart', function(e, toState, toParams, fromState) {
                 checkAuthorization(e, toState, fromState);
             });
         });
+
+        $rootScope.offers = {
+            count: 0
+        };
+
+        $interval(function(){
+            ApiService.offer.getCount().then(function(response){
+                $rootScope.offers.count = parseInt(response);
+            }, function(err){
+                console.log(err);
+            });
+        }, 5000);
 
         function checkAuthorization(e, toState, fromState){
             var isLogin = toState.name === "main.login";

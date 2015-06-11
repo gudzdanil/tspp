@@ -1,6 +1,6 @@
 <div style="margin: 20px 0">
     <form class="col-md-7">
-        <button ng-show="criterion.link" ng-click="copyCharact()" class="btn btn-success">
+        <button ng-show="criterion.id_rule" ng-click="copyCharact()" class="btn btn-success">
             Использовать значения выбранной характеристики
         </button>
         <div class="form-group">
@@ -29,7 +29,7 @@
         <ul class="list-unstyled">
             <li ng-repeat="charact in characts">
                 <label>
-                    <input type="radio" ng-model="criterion.id_categorie" name="charact" ng-value="{{charact.id}}"/>
+                    <input type="radio" ng-model="criterion.id_rule" name="charact" ng-value="{{charact.id}}"/>
                     {{charact.name}} | {{types[charact.type]}}
                 </label>
             </li>

@@ -1,19 +1,20 @@
-<dl class="dl-horizontal">
-    <dt>{{inputType.name}}</dt>
-    <dd ng-if="+readable.status!=0" ng-switch="inputType.type">
-        <span ng-switch-when="range">{{value.val[0]}}-{{value.val[1]}}</span>
-        <span ng-switch-default>{{value.val}}</span>
-    </dd>
-    <dd ng-if="+readable.status==0" ng-switch="inputType.type">
+<div class="form-group">
+    <label>{{inputType.name}}</label>
+    <div ng-switch="inputType.type">
         <input class="form-control" type="text" ng-switch-when="input" ng-model="value.val" />
         <select class="form-control" ng-model="value.val" ng-switch-when="select" ng-options="option for option in inputType.additional">
         </select>
         <input class="form-control" type="number" ng-switch-when="number" ng-model="value.val"/>
         <textarea class="form-control" ng-switch-when="text" ng-model="value.val"></textarea>
         <input class="form-control" type="checkbox" ng-model="value.val" ng-switch-when="bool"/>
-        <div ng-switch-when="range">
-            <input type="number" ng-model="value.val[0]"/> -
-            <input type="number" ng-model="value.val[1]"/>
+        <div ng-switch-when="range" class="text-center clearfix">
+            <div class="col-xs-5" style="padding: 0">
+                <input type="number" ng-model="value.val[0]" class="form-control"/>
+            </div>
+            <div class="col-xs-2">-</div>
+            <div class="col-xs-5" style="padding: 0">
+                <input type="number" ng-model="value.val[1]" class="form-control"/>
+            </div>
         </div>
-    </dd>
-</dl>
+    </div>
+</div>

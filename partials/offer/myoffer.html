@@ -1,0 +1,50 @@
+<div>
+    <h2><input type="text" ng-model="offer.name" ng-if="+offer.status==0"/>
+        <span ng-if="+offer.status!=0" ng-bind="offer.name"></span>
+    </h2>
+
+    <div class="col-sm-3">
+        <img ng-src="{{offer.img}}" alt="product image" style="width: 100%;"/>
+        <input type="text" ng-if="+offer.status==0" class="form-control" ng-model="offer.img"/>
+        <!--<span ng-if="+offer.status!=0" ng-bind="offer.img"></span>-->
+    </div>
+    <div class="col-sm-9">
+        <dl class="dl-horizontal">
+            <dt>Каталог</dt>
+            <dd><select ng-if="+offer.status==0" ng-options="cat.id as cat.name for cat in catalogs" class="form-control" ng-model="offer.catalog"></select>
+                <span ng-if="+offer.status!=0" ng-bind="offer.catalog"></span>
+            </dd>
+        </dl>
+        <dl class="dl-horizontal">
+            <dt>Бренд</dt>
+            <dd><input ng-if="+offer.status==0" type="text" ng-model="offer.brand" class="form-control"/>
+                <span ng-if="+offer.status!=0" ng-bind="offer.brand"></span>
+            </dd>
+        </dl>
+        <dl class="dl-horizontal">
+            <dt>Цена</dt>
+            <dd><input ng-if="+offer.status==0" type="text" ng-model="offer.price" class="form-control"/>
+                <span ng-if="+offer.status!=0">{{offer.price}} грн.</span>
+            </dd>
+        </dl>
+        <dl class="dl-horizontal">
+            <dt>Ссылка</dt>
+            <dd><input ng-if="+offer.status==0" type="text" ng-model="offer.url" class="form-control"/>
+                <span ng-if="+offer.status!=0" ng-bind="offer.url"></span>
+            </dd>
+        </dl>
+        <div ng-repeat="char in characts track by $index">
+            <dl-charact input-type="char" value="values[char.id]" readable="offer" />
+        </div>
+        <dl class="dl-horizontal">
+            <dt>Дополнительная<br/>информация </dt>
+            <dd>
+                <textarea ng-if="+offer.status==0" class="form-control" ng-model="offer.additional"></textarea>
+                <span ng-if="+offer.status!=0" ng-bind="offer.additional"></span>
+            </dd>
+        </dl>
+    </div>
+    <p class="text-center">
+        <button ng-if="+offer.status==0" class="btn btn-default" ng-click="save()">Сохранить</button>
+    </p>
+</div>

@@ -1,1 +1,49 @@
-<p>home page</p>
+<div>
+    <div class="col-sm-10">
+        <input class="form-control col-sm-9" type="text" ng-model="searchText"/>
+    </div>
+    <div class="col-sm-2">
+        <button ng-click="search(searchText)" class="btn btn-default btn-block"><i class="glyphicon glyphicon-search"></i> Поиск</button>
+    </div>
+</div>
+<div class="col-sm-4">
+    <h3>Критерии поиска</h3>
+    <div>
+        <fg-crit input-type="price.type" value="price.value"/>
+    </div>
+    <div>
+        <fg-crit input-type="brand.type" value="brand.value"/>
+    </div>
+    <div class="form-group">
+        <label>Каталог</label>
+        <select ng-model="catalog" class="form-control" ng-options="cat.id as cat.name for cat in catalogs"></select>
+    </div>
+    <div ng-repeat="criterion in criterions track by $index">
+        <fg-crit input-type="criterion" value="values[criterion.id_categorie]" />
+    </div>
+</div>
+<div class="col-sm-8">
+    <h3>Список подарков</h3>
+    <ul class="list-unstyled">
+        <!-- | criterion:criterions:values-->
+        <li ng-repeat="gift in gifts | catalog:catalog | price:price.value.val | brand:brand.value.val">
+            <div class="col-xs-3">
+                <a ui-sref="main.gift({id: gift.id})">
+                    <img ng-if="gift.img" ng-src="{{gift.img}}" alt="{{gift.name}}" class="img-thumbnail"/>
+                    <img ng-if="!gift.img" src="http://www.edilisrl.com/wp-content/themes/edili/images/emptyImg.jpg" alt="{{gift.name}}" class="img-thumbnail"/>
+                </a>
+            </div>
+            <div class="col-xs-9 offer">
+                <p><a ui-sref="main.gift({id: gift.id})" ng-bind="gift.name" class=""></a></p>
+                <p>Каталог: {{catalogNames[gift.catalog]}}</p>
+                <p>Цена: {{gift.price}} грн.</p>
+                <!--<p ng-switch="gift.status">-->
+                    <!--<span class="label label-success" ng-switch-when="1">Подтверждена</span>-->
+                    <!--<span class="label label-warning" ng-switch-when="0">Рассматривается</span>-->
+                    <!--<span class="label label-danger" ng-switch-when="-1">Отменена</span>-->
+                <!--</p>-->
+            </div>
+            <!--<span ng-click="remove(gift.id, $index)" ng-if="+gift.status==0" class="glyphicon glyphicon-remove remove"></span>-->
+        </li>
+    </ul>
+</div>

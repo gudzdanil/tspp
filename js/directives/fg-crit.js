@@ -2,31 +2,30 @@
     'use strict';
 
     angular.module('gifts')
-        .directive('dlCharact', dlCharact);
+        .directive('fgCrit', fgCrit);
 
-    dlCharact.$inject = [];
+    fgCrit.$inject = [];
 
-    function dlCharact(){
+    function fgCrit(){
         return {
             restrict: 'EA',
             scope: {
                 inputType: '=',
-                value: '=',
-                readable: '='
+                value: '='
             },
             replace: true,
-            templateUrl: 'partials/directives/dl-charact.html',
+            templateUrl: 'partials/directives/fg-crit.html',
             link: function(scope){
                 if(scope.inputType){
                     if(scope.inputType.additional){
                         scope.inputType.additional = angular.fromJson(scope.inputType.additional);
                     }
                     if(scope.inputType.type == 'range'){
-                        if(scope.value.val) {
+                        if(scope.value && scope.value.val) {
                             scope.value.val = angular.fromJson(scope.value.val);
                         }
                         else{
-                            scope.value.val = [];
+                            scope.value = {val: []};
                         }
                     }
                     else if(scope.inputType.type == 'number' && scope.value){
