@@ -1,7 +1,7 @@
 tspp rgr project
 
-```json
-{
+```javascript
+var user = {
 "name": "Danil",
 "lastname": "Gudz",
 "age": 19
