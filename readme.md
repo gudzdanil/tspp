@@ -2,8 +2,8 @@ tspp rgr project
 
 ```json
 {
-name: "Danil",
-lastname: "Gudz",
-age: 19
+"name": "Danil",
+"lastname": "Gudz",
+"age": 19
 }
 ```
